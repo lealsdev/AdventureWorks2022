@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessEntity.Api.Controllers
@@ -11,6 +12,7 @@ namespace BusinessEntity.Api.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         ];
 
+        [ApiVersion(1.0)]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -21,6 +23,13 @@ namespace BusinessEntity.Api.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [ApiVersion(2.0)]
+        [HttpGet(Name = "GetWeatherForecast")]
+        public string GetV2()
+        {
+            return "V2 not implemented";
         }
     }
 }

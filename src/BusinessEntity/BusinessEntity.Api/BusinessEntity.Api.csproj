@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Mvc" Version="10.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.18.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessEntity.Application\BusinessEntity.Application.csproj" />
+    <ProjectReference Include="..\BusinessEntity.Infrastructure\BusinessEntity.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
