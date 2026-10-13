@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/BusinessEntity/">
+    <Project Path="src/BusinessEntity/BusinessEntity.Api/BusinessEntity.Api.csproj" />
+    <Project Path="src/BusinessEntity/BusinessEntity.Application/BusinessEntity.Application.csproj" Id="55b768e5-42ef-46e1-8ce3-b37da0f70ea1" />
+    <Project Path="src/BusinessEntity/BusinessEntity.Domain/BusinessEntity.Domain.csproj" Id="4154ab17-8390-4579-a623-097a294089dd" />
+    <Project Path="src/BusinessEntity/BusinessEntity.Infrastructure/BusinessEntity.Infrastructure.csproj" Id="2aed6288-fd15-4271-8089-0d436506e5b9" />
+    <Project Path="src/BusinessEntity/BusinessEntity.UnitTests/BusinessEntity.UnitTests.csproj" Id="275df43a-8aea-4585-ae53-6650175d84b7" />
+  </Folder>
+</Solution>
