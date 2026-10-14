@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>6bebcb6c-e822-4cbc-9db3-d16b7ae59f7f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,10 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntity.Application\BusinessEntity.Application.csproj" />
     <ProjectReference Include="..\BusinessEntity.Infrastructure\BusinessEntity.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
