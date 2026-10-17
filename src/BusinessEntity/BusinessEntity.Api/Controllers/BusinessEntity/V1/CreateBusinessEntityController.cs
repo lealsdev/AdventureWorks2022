@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using BusinessEntity.Api.Configuration;
 using BusinessEntity.Api.Features.BusinessEntity.V1.GetById;
 using BusinessEntity.Application.Features.BusinessEntity.Create;
 using MediatR;
@@ -8,7 +9,7 @@ namespace BusinessEntity.Api.Controllers.BusinessEntity.V1;
 
 [ApiController]
 [ApiVersion(1.0)]
-[Route("api/business-entities")]
+[Route(ApiEndpoints.BusinessEntity.V1.Base)]
 public sealed class CreateBusinessEntityController(ISender mediator) : ControllerBase
 {
     [HttpPost]
@@ -19,6 +20,6 @@ public sealed class CreateBusinessEntityController(ISender mediator) : Controlle
     {
         var result = await mediator.Send(new CreateBusinessEntityCommand(), cancellationToken);
 
-        return CreatedAtRoute("GetBusinessEntityByIdV1", new { id = result.BusinessEntityId }, result);
+        return CreatedAtRoute(ApiEndpoints.BusinessEntity.V1.GetByIdName, new { id = result.BusinessEntityId }, result);
     }
 }
