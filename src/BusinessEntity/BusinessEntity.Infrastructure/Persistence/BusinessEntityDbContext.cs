@@ -1,13 +1,11 @@
 ﻿using BusinessEntity.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using BusinessEntity.Application.Abstractions.Persistence;
 
 namespace BusinessEntity.Infrastructure.Persistence
 {
     public sealed class BusinessEntityDbContext(
-    DbContextOptions<BusinessEntityDbContext> options) : DbContext(options)
+    DbContextOptions<BusinessEntityDbContext> options) : DbContext(options), IUnitOfWork
     {
         public DbSet<BusinessEntityEntity> BusinessEntities =>
             Set<BusinessEntityEntity>();

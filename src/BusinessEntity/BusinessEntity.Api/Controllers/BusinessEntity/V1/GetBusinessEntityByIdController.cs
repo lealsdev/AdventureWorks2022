@@ -17,13 +17,13 @@ public sealed class GetBusinessEntityByIdController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{id:int}")]
+    [HttpGet("{id:int}", Name = "GetBusinessEntityByIdV1")]
     [ProducesResponseType(typeof(GetBusinessEntityByIdResult), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> Get(int id, CancellationToken cancellationToken)
     {
         var query = new GetBusinessEntityByIdQuery(id);
-        var result = await _mediator.Send(query);
+        var result = await _mediator.Send(query, cancellationToken);
 
         return Ok(result);
     }

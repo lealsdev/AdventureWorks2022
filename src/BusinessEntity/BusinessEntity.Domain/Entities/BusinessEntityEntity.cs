@@ -11,4 +11,6 @@ public sealed class BusinessEntityEntity
     private BusinessEntityEntity()
     {
     }
+
+    public static BusinessEntityEntity Create() => new();
 }

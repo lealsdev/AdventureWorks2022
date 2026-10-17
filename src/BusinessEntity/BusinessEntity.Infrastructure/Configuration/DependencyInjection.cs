@@ -17,6 +17,7 @@ namespace BusinessEntity.Infrastructure.Configuration
             });
 
             services.AddScoped<IBusinessEntityRepository, BusinessEntityRepository>();
+            services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<BusinessEntityDbContext>());
             
             return services;
         }
