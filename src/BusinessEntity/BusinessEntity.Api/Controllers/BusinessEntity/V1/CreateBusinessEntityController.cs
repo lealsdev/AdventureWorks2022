@@ -9,6 +9,7 @@ namespace BusinessEntity.Api.Controllers.BusinessEntity.V1;
 
 [ApiController]
 [ApiVersion(1.0)]
+[Tags(ApiEndpoints.BusinessEntity.Tag)]
 [Route(ApiEndpoints.BusinessEntity.V1.Base)]
 public sealed class CreateBusinessEntityController(ISender mediator) : ControllerBase
 {

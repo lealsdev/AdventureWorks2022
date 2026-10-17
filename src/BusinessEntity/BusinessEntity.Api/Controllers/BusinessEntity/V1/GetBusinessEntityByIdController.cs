@@ -8,6 +8,7 @@ namespace BusinessEntity.Api.Features.BusinessEntity.V1.GetById;
 
 [ApiController]
 [ApiVersion(1.0)]
+[Tags(ApiEndpoints.BusinessEntity.Tag)]
 [Route(ApiEndpoints.BusinessEntity.V1.Base)]
 public sealed class GetBusinessEntityByIdController : ControllerBase
 {
