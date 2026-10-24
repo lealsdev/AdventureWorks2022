@@ -3,7 +3,8 @@ using BusinessEntity.Api.Handlers;
 using BusinessEntity.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace BusinessEntity.UnitTests.Api.Handlers;
 
@@ -29,13 +30,39 @@ public sealed class GlobalExceptionHandlerTests
             409 => new ConflictException(internalDetail),
             _ => new InvalidOperationException(internalDetail)
         };
-        var handler = new GlobalExceptionHandler(NullLogger<GlobalExceptionHandler>.Instance);
+        var logger = new Mock<ILogger<GlobalExceptionHandler>>();
+        var handler = new GlobalExceptionHandler(logger.Object);
 
         // Act
         var handled = await handler.TryHandleAsync(context, exception, CancellationToken.None);
 
         // Assert
         Assert.True(handled);
+        var log = Assert.Single(logger.Invocations, x => x.Method.Name == nameof(ILogger.Log));
+        Assert.Equal(statusCode switch
+        {
+            404 => LogLevel.Information,
+            409 => LogLevel.Warning,
+            _ => LogLevel.Error
+        }, log.Arguments[0]);
+        if (statusCode == 500)
+        {
+            Assert.Same(exception, log.Arguments[3]);
+        }
+        else
+        {
+            Assert.Null(log.Arguments[3]);
+        }
+        var state = Assert.IsAssignableFrom<IEnumerable<KeyValuePair<string, object?>>>(log.Arguments[2]).ToDictionary();
+        Assert.Equal(statusCode, state["StatusCode"]);
+        Assert.Equal("test-trace", state["TraceId"]);
+        if (statusCode is 404 or 409)
+        {
+            Assert.Equal(
+                exception.GetType().Name,
+                state["ExceptionType"]);
+        }
+
         Assert.Equal(statusCode, context.Response.StatusCode);
         Assert.Equal("application/problem+json", context.Response.ContentType);
         body.Position = 0;

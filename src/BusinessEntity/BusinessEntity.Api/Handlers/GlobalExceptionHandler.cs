@@ -35,11 +35,24 @@ namespace BusinessEntity.Api.Handlers
                     )
             };
 
-            if (statusCode == StatusCodes.Status500InternalServerError)
+            if (statusCode == StatusCodes.Status404NotFound)
+            {
+                logger.LogInformation(
+                    "Resource not found. StatusCode: {StatusCode}, ExceptionType: {ExceptionType}, TraceId: {TraceId}",
+                    statusCode, exception.GetType().Name, httpContext.TraceIdentifier);
+            }
+            else if (statusCode == StatusCodes.Status409Conflict)
+            {
+                logger.LogWarning(
+                    "Resource conflict. StatusCode: {StatusCode}, ExceptionType: {ExceptionType}, TraceId: {TraceId}",
+                    statusCode, exception.GetType().Name, httpContext.TraceIdentifier);
+            }
+            else
             {
                 logger.LogError(
                     exception,
-                    "An unhandled exception occurred.");
+                    "An unhandled exception occurred. StatusCode: {StatusCode}, TraceId: {TraceId}",
+                    statusCode, httpContext.TraceIdentifier);
             }
 
             await Results.Problem(
