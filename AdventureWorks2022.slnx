@@ -7,4 +7,11 @@
     <Project Path="src/BusinessEntity/BusinessEntity.Infrastructure/BusinessEntity.Infrastructure.csproj" Id="2aed6288-fd15-4271-8089-0d436506e5b9" />
     <Project Path="src/BusinessEntity/BusinessEntity.UnitTests/BusinessEntity.UnitTests.csproj" Id="275df43a-8aea-4585-ae53-6650175d84b7" />
   </Folder>
+  <Folder Name="/src/People/">
+    <Project Path="src/People/People.Api/People.Api.csproj" Id="8af7805e-6dcc-4261-b3b2-eb2892f883af" />
+    <Project Path="src/People/People.Application/People.Application.csproj" />
+    <Project Path="src/People/People.Domain/People.Domain.csproj" />
+    <Project Path="src/People/People.Infrastructure/People.Infrastructure.csproj" />
+    <Project Path="src/People/People.UnitTests/People.UnitTests.csproj" />
+  </Folder>
 </Solution>
