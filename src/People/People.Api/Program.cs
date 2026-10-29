@@ -2,6 +2,7 @@ using Scalar.AspNetCore;
 using People.Infrastructure.Configuration;
 using People.Application.Configuration;
 using People.Api.Extensions;
+using People.Api.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,12 +11,16 @@ builder.Services.AddApplicationConfiguration();
 builder.Services.AddInfrastructureConfiguration(builder.Configuration);
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseExceptionHandler();
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
