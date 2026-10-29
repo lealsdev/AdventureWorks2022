@@ -1,8 +1,13 @@
 using Scalar.AspNetCore;
+using People.Infrastructure.Configuration;
+using People.Application.Configuration;
+using People.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddApiVersioningConfiguration(builder.Configuration);
+builder.Services.AddApplicationConfiguration();
+builder.Services.AddInfrastructureConfiguration(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
