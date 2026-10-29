@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\People.Application\People.Application.csproj" />
-    <ProjectReference Include="..\..\..\People.Infrastructure\People.Infrastructure.csproj" />
+    <ProjectReference Include="..\People.Application\People.Application.csproj" />
+    <ProjectReference Include="..\People.Infrastructure\People.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
