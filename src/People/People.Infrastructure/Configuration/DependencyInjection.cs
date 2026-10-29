@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using People.Application.Abstractions;
 using People.Infrastructure.Persistence;
+using People.Infrastructure.Persistence.Repositories;
 
 namespace People.Infrastructure.Configuration
 {
@@ -15,6 +16,7 @@ namespace People.Infrastructure.Configuration
                 options.UseSqlServer(GetConnectionString(configuration));
             });
 
+            services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<PersonDbContext>());
 
             return services;
