@@ -23,8 +23,8 @@ namespace People.Infrastructure.Persistence.Configurations
                 .HasColumnName("PersonType")
                 .HasColumnType("nchar(2)")
                 .HasConversion(
-                    value => ToDatabase(value),
-                    value => FromDatabase(value))
+                    value => PersonTypeToDatabase(value),
+                    value => PersonTypeFromDatabase(value))
                 .IsRequired();
 
             builder.Property(p => p.NameStyle)
@@ -57,7 +57,10 @@ namespace People.Infrastructure.Persistence.Configurations
             builder.Property(p => p.EmailPromotion)
                 .HasColumnName("EmailPromotion")
                 .IsRequired()
-                .HasDefaultValue(0);
+                .HasDefaultValue(EmailPromotionPreference.None)
+                .HasConversion(
+                    value => EmailPromotionPreferenceToDatabase(value),
+                    value => EmailPromotionPreferenceFromDatabase(value));
 
             builder.Property(p => p.AdditionalContactInfo)
                 .HasColumnName("AdditionalContactInfo")
@@ -79,7 +82,7 @@ namespace People.Infrastructure.Persistence.Configurations
                 .ValueGeneratedOnAdd();
         }
 
-        private static string ToDatabase(PersonType personType)
+        private static string PersonTypeToDatabase(PersonType personType)
         {
             return personType switch
             {
@@ -93,7 +96,7 @@ namespace People.Infrastructure.Persistence.Configurations
             };
         }
 
-        private static PersonType FromDatabase(string value)
+        private static PersonType PersonTypeFromDatabase(string value)
         {
             return value.Trim() switch
             {
@@ -106,5 +109,29 @@ namespace People.Infrastructure.Persistence.Configurations
                 _ => throw new ArgumentOutOfRangeException(nameof(value))
             };
         }
+
+        private static int EmailPromotionPreferenceToDatabase(EmailPromotionPreference preference)
+        {
+            return preference switch
+            {
+                EmailPromotionPreference.None => 0,
+                EmailPromotionPreference.AdventureWorksOnly => 1,
+                EmailPromotionPreference.AdventureWorksAndPartners => 2,
+                _ => throw new ArgumentOutOfRangeException(nameof(preference))
+            };
+        }
+
+        private static EmailPromotionPreference EmailPromotionPreferenceFromDatabase(int value)
+        {
+            return value switch
+            {
+                0 => EmailPromotionPreference.None,
+                1 => EmailPromotionPreference.AdventureWorksOnly,
+                2 => EmailPromotionPreference.AdventureWorksAndPartners,
+                _ => throw new ArgumentOutOfRangeException(nameof(value))
+            };
+        }
+
+
     }
 }

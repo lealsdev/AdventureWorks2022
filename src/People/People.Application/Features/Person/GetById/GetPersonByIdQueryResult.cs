@@ -11,7 +11,7 @@ namespace People.Application.Features.Person.GetById
         string? MiddleName,
         string LastName,
         string? Suffix,
-        int EmailPromotion,
+        EmailPromotionPreference EmailPromotion,
         string? AdditionalContactInfo,
         string? Demographics,
         Guid RowGuid,

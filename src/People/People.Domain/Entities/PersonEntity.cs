@@ -20,7 +20,7 @@ namespace People.Domain.Entities
 
         public string? Suffix { get; private set; }
 
-        public int EmailPromotion { get; private set; }
+        public EmailPromotionPreference EmailPromotion { get; private set; }
 
         public string? AdditionalContactInfo { get; private set; }
 
