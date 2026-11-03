@@ -1,6 +1,7 @@
-namespace People.Domain.ValueObjects;
-
-public sealed record SurveyDate(
-    DateOnly Value, 
-    int? OffsetMinutes = null
-);
+namespace People.Domain.ValueObjects
+{
+    public sealed record SurveyDate(
+        DateOnly Value,
+        int? OffsetMinutes = null
+    );
+}
