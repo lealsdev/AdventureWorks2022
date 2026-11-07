@@ -1,4 +1,6 @@
-﻿using People.Domain.Enums;
+using People.Domain.ValueObjects.AdditionalContactInfo;
+using People.Domain.ValueObjects.Demographics;
+using People.Domain.Enums;
 
 namespace People.Application.Features.Person.GetById
 {
@@ -12,8 +14,8 @@ namespace People.Application.Features.Person.GetById
         string LastName,
         string? Suffix,
         EmailPromotionPreference EmailPromotion,
-        string? AdditionalContactInfo,
-        string? Demographics,
+        ContactInformation? AdditionalContactInfo,
+        PersonDemographics? Demographics,
         Guid RowGuid,
         DateTime ModifiedDate
    );
