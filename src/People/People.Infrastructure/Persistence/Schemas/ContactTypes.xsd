@@ -1,0 +1,55 @@
+<xsd:schema targetNamespace="http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ContactTypes"
+    xmlns="http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ContactTypes"
+    elementFormDefault="qualified"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+
+    <xsd:complexType name="specialInstructionsType" mixed="true">
+        <xsd:sequence>
+            <xsd:any processContents="strict"
+                namespace = "##targetNamespace"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="phoneNumberType">
+        <xsd:sequence>
+            <xsd:element name="number" >
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[0-9\(\)\-]*"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="SpecialInstructions" minOccurs="0" type="specialInstructionsType" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="eMailType">
+        <xsd:sequence>
+            <xsd:element name="eMailAddress" type="xsd:string" />
+            <xsd:element name="SpecialInstructions" minOccurs="0" type="specialInstructionsType" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="addressType">
+        <xsd:sequence>
+            <xsd:element name="Street" type="xsd:string" minOccurs="1" maxOccurs="2" />
+            <xsd:element name="City" type="xsd:string" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="StateProvince" type="xsd:string" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="PostalCode" type="xsd:string" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="CountryRegion" type="xsd:string" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="SpecialInstructions" type="specialInstructionsType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="telephoneNumber"            type="phoneNumberType" />
+    <xsd:element name="mobile"                     type="phoneNumberType" />
+    <xsd:element name="pager"                      type="phoneNumberType" />
+    <xsd:element name="facsimileTelephoneNumber"   type="phoneNumberType" />
+    <xsd:element name="telexNumber"                type="phoneNumberType" />
+    <xsd:element name="internationaliSDNNumber"    type="phoneNumberType" />
+    <xsd:element name="eMail"                      type="eMailType" />
+    <xsd:element name="homePostalAddress"          type="addressType" />
+    <xsd:element name="physicalDeliveryOfficeName" type="addressType" />
+    <xsd:element name="registeredAddress"          type="addressType" />
+</xsd:schema>

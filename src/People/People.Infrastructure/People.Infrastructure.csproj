@@ -15,4 +15,7 @@
     <ProjectReference Include="..\People.Application\People.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Persistence/Schemas/*.xsd" />
+  </ItemGroup>
 </Project>

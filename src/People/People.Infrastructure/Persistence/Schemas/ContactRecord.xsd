@@ -1,0 +1,15 @@
+<xsd:schema targetNamespace="http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ContactRecord"
+    elementFormDefault="qualified"
+    xmlns="http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ContactRecord"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+
+    <xsd:element name="ContactRecord" >
+        <xsd:complexType mixed="true" >
+            <xsd:choice minOccurs="0" maxOccurs="unbounded" >
+                <xsd:any processContents="strict" 
+                    namespace="http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ContactTypes" />
+            </xsd:choice>
+            <xsd:attribute name="date" type="xsd:date" />
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

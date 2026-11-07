@@ -1,3 +1,7 @@
+using People.Infrastructure.Persistence.Converters;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using People.Domain.ValueObjects.AdditionalContactInfo;
+using People.Domain.ValueObjects.Demographics;
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -64,11 +68,21 @@ namespace People.Infrastructure.Persistence.Configurations
 
             builder.Property(p => p.AdditionalContactInfo)
                 .HasColumnName("AdditionalContactInfo")
-                .HasColumnType("xml");
+                .HasColumnType("xml")
+                .HasConversion(v => AdditionalContactInfoXmlConverter.ToXml(v), v => AdditionalContactInfoXmlConverter.FromXml(v))
+                .Metadata.SetValueComparer(new ValueComparer<ContactInformation?>(
+                    (a, b) => AdditionalContactInfoXmlConverter.ToXml(a) == AdditionalContactInfoXmlConverter.ToXml(b),
+                    v => v == null ? 0 : AdditionalContactInfoXmlConverter.ToXml(v)!.GetHashCode(),
+                    v => v));
 
             builder.Property(p => p.Demographics)
                 .HasColumnName("Demographics")
-                .HasColumnType("xml");
+                .HasColumnType("xml")
+                .HasConversion(v => DemographicsXmlConverter.ToXml(v), v => DemographicsXmlConverter.FromXml(v))
+                .Metadata.SetValueComparer(new ValueComparer<PersonDemographics?>(
+                    (a, b) => DemographicsXmlConverter.ToXml(a) == DemographicsXmlConverter.ToXml(b),
+                    v => v == null ? 0 : DemographicsXmlConverter.ToXml(v)!.GetHashCode(),
+                    v => v));
 
             builder.Property(p => p.RowGuid)
                 .HasColumnName("rowguid")
