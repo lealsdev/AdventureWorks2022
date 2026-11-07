@@ -2,7 +2,6 @@ using People.Infrastructure.Persistence.Converters;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using People.Domain.ValueObjects.AdditionalContactInfo;
 using People.Domain.ValueObjects.Demographics;
-﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using People.Domain.Entities;

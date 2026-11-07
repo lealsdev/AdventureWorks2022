@@ -1,3 +1,5 @@
+using People.Domain.ValueObjects.AdditionalContactInfo;
+using People.Domain.ValueObjects.Demographics;
 ﻿using People.Domain.Enums;
 
 namespace People.Domain.Entities
@@ -22,9 +24,9 @@ namespace People.Domain.Entities
 
         public EmailPromotionPreference EmailPromotion { get; private set; }
 
-        public string? AdditionalContactInfo { get; private set; }
+        public ContactInformation? AdditionalContactInfo { get; private set; }
 
-        public string? Demographics { get; private set; }
+        public PersonDemographics? Demographics { get; private set; }
 
         public Guid RowGuid { get; private set; }
 
